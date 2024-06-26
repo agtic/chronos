@@ -166,7 +166,7 @@ def session_scope():
     try:
         yield Session
         Session.commit()
-    except Exception, e:
+    except Exception as e:
         logger.exception("Failed during interaction with the db: {}".format(e))
         Session.rollback()
     finally:

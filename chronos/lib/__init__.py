@@ -2,7 +2,7 @@ import os
 import sys
 import time
 import serial
-import thread
+import _thread
 import requests
 from sqlalchemy import desc
 from sqlalchemy.sql import func
@@ -116,7 +116,7 @@ class Device(object):
         to_backup = kwargs.pop("to_backup", False)
         with db.session_scope() as session:
             property_ = session.query(device).filter(device.backup == to_backup).first()
-            for key, value in kwargs.items():
+            for key, value in list(kwargs.items()):
                 setattr(property_, key, value)
 
     def save_status(self):
@@ -173,7 +173,7 @@ class Chiller(Device):
     TYPE = "chiller"
 
     def __init__(self, number):
-        if number not in range(1, 5):
+        if number not in list(range(1, 5)):
             raise ValueError("Chiller number must be in range from 1 to 4")
         else:
             self.number = number
@@ -805,9 +805,9 @@ class Chronos(object):
     def emergency_shutdown(self):
         mode = self.mode
         devices = [bool(device.status) for device in self.devices]
-        devices_ = zip(self.devices, devices)
+        devices_ = list(zip(self.devices, devices))
         valves = [bool(self.winter_valve.status), bool(self.summer_valve.status)]
-        valves_ = zip(self.valves, valves)
+        valves_ = list(zip(self.valves, valves))
         all_devices = devices_ + valves_
         return_temp = self.return_temp
         status_string = "; ".join("{}: {}".format(
@@ -832,4 +832,4 @@ class Chronos(object):
             shutdown = True
         if shutdown:
             self.turn_off_devices()
-            thread.interrupt_main()
+            _thread.interrupt_main()

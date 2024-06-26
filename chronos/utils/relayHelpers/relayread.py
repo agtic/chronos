@@ -19,7 +19,7 @@ import sys
 import serial
 
 if (len(sys.argv) < 2):
-        print "Usage: relayread.py <RELAYNUM> \nEg: relayread.py 0"
+        print("Usage: relayread.py <RELAYNUM> \nEg: relayread.py 0")
         sys.exit(0)
 else:
         relayNum = sys.argv[1];
@@ -44,10 +44,10 @@ response = serPort.read(25)
 #print response
 
 if(response.find("on") > 0):
-	print "Relay " + str(relayNum) +" is ON"
+	print("Relay " + str(relayNum) +" is ON")
 
 elif(response.find("off") > 0):
-	print "Relay " + str(relayNum) +" is OFF"
+	print("Relay " + str(relayNum) +" is OFF")
 
 #Close the port
 serPort.close()

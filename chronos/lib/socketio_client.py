@@ -1,4 +1,4 @@
-from socketIO_client import SocketIO
+from .socketIO_client import SocketIO
 
 socketIO = SocketIO("localhost", 8000, transports=["xhr-polling"])
 

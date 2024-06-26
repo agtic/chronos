@@ -22,9 +22,9 @@ client = ModbusSerialClient(
 
 client.connect()
 hregs = client.read_holding_registers(6, count=1, unit=1)
-print(c_to_f(hregs.getRegister(0) / 10.0))
+print((c_to_f(hregs.getRegister(0) / 10.0)))
 
 iregs = client.read_input_registers(3, count=9, unit=1)
 for i in range (1, 9):
-    print (c_to_f(iregs.getRegister(i) / 10.0))
-    print (float(iregs.getRegister(i)))
+    print((c_to_f(iregs.getRegister(i) / 10.0)))
+    print((float(iregs.getRegister(i))))

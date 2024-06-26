@@ -80,7 +80,7 @@ def dump_log():
 
 @app.route("/update_settings", methods=["POST"])
 def update_settings():
-    for key, value in request.form.items():
+    for key, value in list(request.form.items()):
         if value:
             setattr(chronos, key, float(value))
     return jsonify(data=request.form)

@@ -42,8 +42,8 @@ def setup_server():
     # run the server you want
     #---------------------------------------------------------------------------# 
     # RTU:
-    print ("address: 0x00, value=" + str(context[1].getValues(3, 0)))
-    print ("address: 0x01, value=" + str(context[1].getValues(3, 1)))
+    print(("address: 0x00, value=" + str(context[1].getValues(3, 0))))
+    print(("address: 0x01, value=" + str(context[1].getValues(3, 1))))
     return context
 
 if __name__ == "__main__":
